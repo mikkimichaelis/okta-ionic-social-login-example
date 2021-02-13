@@ -40,11 +40,19 @@ export class AuthService extends IonicAuth {
   }
 
   private async addConfig() {
-    const scopes = 'openid profile' + (this.onDevice() ? ' offline_access' : '');
-    const redirectUri = this.onDevice() ? 'com.okta.dev-317297:/callback' : window.location.origin + '/callback';
-    const logoutRedirectUri = this.onDevice() ? 'com.okta.dev-317297:/logout' : window.location.origin + '/logout';
-    const clientId = '0oaqt9tqoPRoMaaSF4x6';
-    const issuer = 'https://id.mattraible.com/oauth2/default';
+    const config = {
+      clientId: '0oa5xkexuo41THfTF5d6',
+      issuer: 'https://dev-38660825.okta.com/oauth2/default',
+      redirectUri: 'com.okta.dev-38660825:/callback',
+      logoutRedirectUri: 'com.okta.dev-38660825:/logout',
+      scopes: 'openid profile',
+      idp: '0oa5sh3xnOH6srPOi5d6'
+    }
+    const scopes = config.scopes + (this.onDevice() ? ' offline_access' : '');
+    const redirectUri = this.onDevice() ? config.redirectUri : window.location.origin + '/callback';
+    const logoutRedirectUri = this.onDevice() ? config.logoutRedirectUri : window.location.origin + '/logout';
+    const clientId = config.clientId;
+    const issuer = config.issuer;
     const authConfig: any = {
       identity_client: clientId,
       identity_server: issuer,
@@ -52,6 +60,9 @@ export class AuthService extends IonicAuth {
       end_session_redirect_url: logoutRedirectUri,
       scopes,
       usePkce: true,
+      auth_extras: {
+        idp: config.idp
+      }
     };
 
     this.authConfig = {...authConfig};

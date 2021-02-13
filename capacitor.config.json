@@ -1,6 +1,6 @@
 {
-  "appId": "io.ionic.starter",
-  "appName": "ionic-social",
+  "appId": "app.authcore.ios",
+  "appName": "authcore-ios",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",
